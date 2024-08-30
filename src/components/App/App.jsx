@@ -16,11 +16,19 @@ function App() {
   });
 
   const totalFeedback = values.good + values.neutral + values.bad;
+  const positiveFeedback = Math.round((values.good / totalFeedback) * 100);
+
+  const updateFeedback = feedbackType => {
+    setValues({
+      ...values,
+      [feedbackType]: values[feedbackType] + 1,
+    });
+  };
 
   return (
     <>
       <Description />
-      <Options />
+      <Options updateFeedback={updateFeedback} />
       <Feedback />
     </>
   );
